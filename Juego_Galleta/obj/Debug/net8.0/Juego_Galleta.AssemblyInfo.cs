@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Juego_Galleta")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f65712ca7b8eea4ef21bb5198b477184a6af69c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed40d3a676d4306785f193b5c9ac3cf087d3fce4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Juego_Galleta")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Juego_Galleta")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
