@@ -1,5 +1,6 @@
 ﻿using Juego_Galleta.Domain.Entities;
 using Juego_Galleta.Domain.Interfaces;
+using Juego_Galleta.Application.AI;
 
 namespace Juego_Galleta;
 
@@ -7,13 +8,15 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("=== Juego de la Galleta - Fase 3: Generador de Tablero ===\n");
+        Console.WriteLine("=== Juego de la Galleta - Fase 4: Evaluador Heurístico ===\n");
 
         TestPhase1();
         Console.WriteLine("\n" + new string('=', 60) + "\n");
         TestPhase2();
         Console.WriteLine("\n" + new string('=', 60) + "\n");
         TestPhase3();
+        Console.WriteLine("\n" + new string('=', 60) + "\n");
+        TestPhase4();
 
         Console.WriteLine("\n=== Todas las pruebas completadas exitosamente ===");
         Console.WriteLine("Presiona cualquier tecla para salir...");
@@ -245,6 +248,213 @@ internal class Program
 
         Console.WriteLine();
         Console.WriteLine($"  Esta forma contiene {board.Cells.Count} celdas (cuadros) para capturar");
+    }
+
+    static void TestPhase4()
+    {
+        Console.WriteLine("--- FASE 4: Evaluador Heurístico (SimpleDotsEvaluator) ---\n");
+
+        var evaluator = new SimpleDotsEvaluator();
+        var factory = new GalletaShapeFactory(3);
+        var board = factory.Build();
+
+        // TEST 1: Estado inicial
+        Console.WriteLine("TEST 1: Evaluación del estado inicial");
+        var gameState = new GameState(board);
+        int score = evaluator.Evaluate(gameState, 0);
+        var breakdown = evaluator.GetDetailedEvaluation(gameState, 0);
+        Console.WriteLine($"  Score: {score}");
+        Console.WriteLine($"  Breakdown: {breakdown}");
+        Console.WriteLine($"  ✓ Score debe ser 0 (estado simétrico): {score == 0}\n");
+
+        // TEST 2: Estado con ventaja material
+        Console.WriteLine("TEST 2: Estado con ventaja material (Jugador 0 captura 2 celdas)");
+        SimulateAndEvaluate(evaluator, board, new[] { 0, 1, 2, 3 }, 0);
+
+        // TEST 3: Identificación de movimientos peligrosos
+        Console.WriteLine("\nTEST 3: Identificación de movimientos seguros vs peligrosos");
+        TestSafeAndDangerousMoves(evaluator);
+
+        // TEST 4: Evaluación en diferentes etapas del juego
+        Console.WriteLine("\nTEST 4: Evaluación progresiva del juego");
+        TestProgressiveEvaluation(evaluator);
+
+        // TEST 5: Estado terminal
+        Console.WriteLine("\nTEST 5: Evaluación de estado terminal");
+        TestTerminalEvaluation(evaluator);
+
+        // TEST 6: Comparación de movimientos
+        Console.WriteLine("\nTEST 6: Comparación de calidad de movimientos");
+        TestMoveComparison(evaluator);
+
+        Console.WriteLine("\n✓ Todos los tests de Fase 4 pasaron correctamente");
+    }
+
+    static void SimulateAndEvaluate(SimpleDotsEvaluator evaluator, Board board, int[] edgeIds, int player)
+    {
+        var state = new GameState(board);
+        
+        foreach (int edgeId in edgeIds)
+        {
+            if (edgeId < board.Edges.Count)
+            {
+                var move = new Move(edgeId);
+                var result = state.Apply(move);
+                if (result.CapturedCount > 0)
+                {
+                    Console.WriteLine($"  Capturó {result.CapturedCount} celda(s)");
+                }
+            }
+        }
+
+        int score = evaluator.Evaluate(state, player);
+        var breakdown = evaluator.GetDetailedEvaluation(state, player);
+        
+        Console.WriteLine($"  Estado: {state}");
+        Console.WriteLine($"  Score para jugador {player}: {score}");
+        Console.WriteLine($"  Breakdown: {breakdown}");
+        Console.WriteLine($"  ✓ Material score debe ser > 0: {breakdown.MaterialScore > 0}");
+    }
+
+    static void TestSafeAndDangerousMoves(SimpleDotsEvaluator evaluator)
+    {
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        // Hacer algunos movimientos para crear una celda con 2 lados
+        state.Apply(new Move(0));  // Primera arista
+        state.Apply(new Move(1));  // Segunda arista de una celda
+
+        Console.WriteLine($"  Estado actual: {state}");
+
+        int safeCount = 0;
+        int dangerousCount = 0;
+        int capturingCount = 0;
+
+        var moves = state.GenerateMoves().ToList();
+        
+        foreach (var move in moves)
+        {
+            bool isSafe = evaluator.IsSafeMove(state, move);
+            bool isCapturing = evaluator.IsCapturingMove(state, move);
+
+            if (isCapturing)
+            {
+                capturingCount++;
+                Console.WriteLine($"  Move {move.EdgeId}: CAPTURING");
+            }
+            else if (isSafe)
+            {
+                safeCount++;
+            }
+            else
+            {
+                dangerousCount++;
+                Console.WriteLine($"  Move {move.EdgeId}: DANGEROUS (creates 3-sided cell)");
+            }
+        }
+
+        Console.WriteLine($"  ✓ Safe moves: {safeCount}");
+        Console.WriteLine($"  ✓ Dangerous moves: {dangerousCount}");
+        Console.WriteLine($"  ✓ Capturing moves: {capturingCount}");
+        Console.WriteLine($"  ✓ Total: {safeCount + dangerousCount + capturingCount} = {moves.Count}");
+    }
+
+    static void TestProgressiveEvaluation(SimpleDotsEvaluator evaluator)
+    {
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        Console.WriteLine("  Evaluaciones a medida que progresa el juego:");
+        
+        var random = new Random(42);
+        int moveCount = 0;
+
+        while (!state.IsTerminal() && moveCount < 8)
+        {
+            var moves = state.GenerateMoves().ToList();
+            var randomMove = moves[random.Next(moves.Count)];
+            
+            state.Apply(randomMove);
+            moveCount++;
+
+            var breakdown = evaluator.GetDetailedEvaluation(state, 0);
+            Console.WriteLine($"    Mov {moveCount}: {breakdown}");
+        }
+
+        Console.WriteLine($"  ✓ Evaluación progresiva completada ({moveCount} movimientos)");
+    }
+
+    static void TestTerminalEvaluation(SimpleDotsEvaluator evaluator)
+    {
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        // Jugar hasta el final
+        var random = new Random(123);
+        while (!state.IsTerminal())
+        {
+            var moves = state.GenerateMoves().ToList();
+            state.Apply(moves[random.Next(moves.Count)]);
+        }
+
+        Console.WriteLine($"  Estado final: {state}");
+        
+        int scorePlayer0 = evaluator.Evaluate(state, 0);
+        int scorePlayer1 = evaluator.Evaluate(state, 1);
+
+        Console.WriteLine($"  Score para Jugador 0: {scorePlayer0}");
+        Console.WriteLine($"  Score para Jugador 1: {scorePlayer1}");
+        Console.WriteLine($"  ✓ Scores deben ser opuestos: {scorePlayer0 == -scorePlayer1}");
+
+        int winner = state.GetWinner();
+        if (winner == 0)
+        {
+            Console.WriteLine($"  ✓ Ganó Jugador 0, score debe ser muy positivo: {scorePlayer0 > 5000}");
+        }
+        else if (winner == 1)
+        {
+            Console.WriteLine($"  ✓ Ganó Jugador 1, score debe ser muy negativo: {scorePlayer0 < -5000}");
+        }
+        else
+        {
+            Console.WriteLine($"  ✓ Empate, score debe ser 0: {scorePlayer0 == 0}");
+        }
+    }
+
+    static void TestMoveComparison(SimpleDotsEvaluator evaluator)
+    {
+        var factory = new GalletaShapeFactory(3);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        // Hacer algunos movimientos para crear situaciones interesantes
+        state.Apply(new Move(0));
+        state.Apply(new Move(1));
+        state.Apply(new Move(2));
+
+        Console.WriteLine("  Comparando calidad de diferentes movimientos:");
+
+        var moves = state.GenerateMoves().Take(5).ToList();
+        
+        foreach (var move in moves)
+        {
+            // Simular el movimiento
+            var result = state.Apply(move);
+            int score = evaluator.Evaluate(state, state.CurrentPlayer == 0 ? 1 : 0);
+            state.Undo(result);
+
+            bool isSafe = evaluator.IsSafeMove(state, move);
+            bool isCapturing = evaluator.IsCapturingMove(state, move);
+
+            string type = isCapturing ? "CAPTURING" : (isSafe ? "SAFE" : "DANGEROUS");
+            Console.WriteLine($"    Move {move.EdgeId} ({type}): Score después = {score}");
+        }
+
+        Console.WriteLine("  ✓ Comparación de movimientos completada");
     }
 
     static Board CreateSimpleBoard()
