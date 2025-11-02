@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Program.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Program.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Program.cs",
+              "RelativeToolTip": "Juego_Galleta\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T23:56:33.683Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
