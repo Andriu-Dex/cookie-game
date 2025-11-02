@@ -51,33 +51,50 @@ public sealed class GalletaShapeFactory : IBoardShape
 
     /// <summary>
     /// Generates all valid points within the diamond shape.
-    /// A point is valid if its Manhattan distance from center <= radius.
+    /// Creates a proper diamond/cookie shape with an extra row in the middle for the galleta shape.
+    /// For radius N, creates a diamond with width/height of 2*N+2 cells (including the extra middle row).
     /// </summary>
     private List<Point2D> GenerateValidPoints()
     {
         var points = new List<Point2D>();
-        var center = new Point2D(0, 0);
-
-        // Scan a square region and keep only points within Manhattan distance
-        for (int y = -_radius; y <= _radius; y++)
+        
+        // Generate points row by row - top half (including middle)
+        for (int y = -_radius; y <= 0; y++)
         {
-            for (int x = -_radius; x <= _radius; x++)
+            // Calculate how many cells wide this row should be
+            int distFromCenter = Math.Abs(y);
+            int halfWidth = _radius - distFromCenter;
+            
+            // Generate points from left edge to right edge of the diamond at this row
+            for (int x = -halfWidth; x <= halfWidth + 1; x++)
             {
-                var point = new Point2D(x, y);
-                if (point.ManhattanDistance(center) <= _radius)
+                points.Add(new Point2D(x, y));
+            }
+            
+            // If this is the widest row (center), add an extra row below it
+            if (y == 0)
+            {
+                for (int x = -halfWidth; x <= halfWidth + 1; x++)
                 {
-                    points.Add(point);
+                    points.Add(new Point2D(x, y + 1));
                 }
             }
         }
-
-        // Sort points for consistent ordering (top to bottom, left to right)
-        points.Sort((a, b) =>
+        
+        // Generate points row by row - bottom half (starting after the extra row)
+        for (int y = 2; y <= _radius + 1; y++)
         {
-            int yCompare = a.Y.CompareTo(b.Y);
-            return yCompare != 0 ? yCompare : a.X.CompareTo(b.X);
-        });
-
+            // Calculate how many cells wide this row should be
+            int distFromCenter = y - 1; // Distance from the extra middle row
+            int halfWidth = _radius - distFromCenter;
+            
+            // Generate points from left edge to right edge of the diamond at this row
+            for (int x = -halfWidth; x <= halfWidth + 1; x++)
+            {
+                points.Add(new Point2D(x, y));
+            }
+        }
+        
         return points;
     }
 

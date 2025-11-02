@@ -231,28 +231,47 @@
 
     private void CalculateVertexPositions()
     {
-        // Recreate the same logic as GalletaShapeFactory to get Point2D positions
-        var points = new List<(int index, int x, int y)>();
+        // Use EXACTLY the same logic as GalletaShapeFactory to avoid index mismatches
+        var points = new List<(int x, int y)>();
         
-        for (int y = -_selectedRadius; y <= _selectedRadius; y++)
+        // Generate points row by row - top half (including middle)
+        for (int y = -_selectedRadius; y <= 0; y++)
         {
-            for (int x = -_selectedRadius; x <= _selectedRadius; x++)
+            // Calculate how many cells wide this row should be
+            int distFromCenter = Math.Abs(y);
+            int halfWidth = _selectedRadius - distFromCenter;
+            
+            // Generate points from left edge to right edge of the diamond at this row
+            for (int x = -halfWidth; x <= halfWidth + 1; x++)
             {
-                if (Math.Abs(x) + Math.Abs(y) <= _selectedRadius)
+                points.Add((x, y));
+            }
+            
+            // If this is the widest row (center), add an extra row below it
+            if (y == 0)
+            {
+                for (int x = -halfWidth; x <= halfWidth + 1; x++)
                 {
-                    points.Add((points.Count, x, y));
+                    points.Add((x, y + 1));
                 }
             }
         }
         
-        // Sort the same way as in GalletaShapeFactory
-        points.Sort((a, b) =>
+        // Generate points row by row - bottom half (starting after the extra row)
+        for (int y = 2; y <= _selectedRadius + 1; y++)
         {
-            int yCompare = a.y.CompareTo(b.y);
-            return yCompare != 0 ? yCompare : a.x.CompareTo(b.x);
-        });
+            // Calculate how many cells wide this row should be
+            int distFromCenter = y - 1; // Distance from the extra middle row
+            int halfWidth = _selectedRadius - distFromCenter;
+            
+            // Generate points from left edge to right edge of the diamond at this row
+            for (int x = -halfWidth; x <= halfWidth + 1; x++)
+            {
+                points.Add((x, y));
+            }
+        }
         
-        // Create mapping
+        // Create mapping (points are already in order)
         _vertexPositions.Clear();
         for (int i = 0; i < points.Count; i++)
         {
