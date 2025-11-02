@@ -1,6 +1,7 @@
 ﻿using Juego_Galleta.Domain.Entities;
 using Juego_Galleta.Domain.Interfaces;
 using Juego_Galleta.Application.AI;
+using Juego_Galleta.Presentation;
 
 namespace Juego_Galleta;
 
@@ -8,7 +9,27 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("=== Juego de la Galleta - Fase 5: Minimax con Alpha-Beta ===\n");
+        // Verificar si se ejecuta en modo de prueba
+        if (args.Length > 0 && args[0] == "--test")
+        {
+            RunTests();
+        }
+        else
+        {
+            // Modo de juego normal
+            RunGame();
+        }
+    }
+
+    static void RunGame()
+    {
+        var gameController = new GameController();
+        gameController.Run();
+    }
+
+    static void RunTests()
+    {
+        Console.WriteLine("=== Juego de la Galleta - Suite de Pruebas ===\n");
 
         TestPhase1();
         Console.WriteLine("\n" + new string('=', 60) + "\n");
