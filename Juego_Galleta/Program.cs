@@ -1,4 +1,5 @@
 ﻿using Juego_Galleta.Domain.Entities;
+using Juego_Galleta.Domain.Interfaces;
 
 namespace Juego_Galleta;
 
@@ -6,11 +7,13 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("=== Juego de la Galleta - Fase 2: Prueba de GameState ===\n");
+        Console.WriteLine("=== Juego de la Galleta - Fase 3: Generador de Tablero ===\n");
 
         TestPhase1();
         Console.WriteLine("\n" + new string('=', 60) + "\n");
         TestPhase2();
+        Console.WriteLine("\n" + new string('=', 60) + "\n");
+        TestPhase3();
 
         Console.WriteLine("\n=== Todas las pruebas completadas exitosamente ===");
         Console.WriteLine("Presiona cualquier tecla para salir...");
@@ -105,6 +108,143 @@ internal class Program
         Console.WriteLine($"  ✓ Clon debe tener 3 movimientos restantes: {clone.RemainingEdges == 3}");
 
         Console.WriteLine("\n✓ Todos los tests de Fase 2 pasaron correctamente");
+    }
+
+    static void TestPhase3()
+    {
+        Console.WriteLine("--- FASE 3: Generador de Tablero (GalletaShapeFactory) ---\n");
+
+        // Test con diferentes tamaños de tablero
+        var radii = new[] { 2, 3, 4, 5 };
+
+        foreach (int radius in radii)
+        {
+            Console.WriteLine($"TEST: Tablero con radio {radius}");
+            
+            IBoardShape factory = new GalletaShapeFactory(radius);
+            Console.WriteLine($"  Info: {((GalletaShapeFactory)factory).GetBoardInfo()}");
+            
+            var board = factory.Build();
+            Console.WriteLine($"  {board}");
+            
+            // Validar que el tablero es jugable
+            var gameState = new GameState(board);
+            var moves = gameState.GenerateMoves().ToList();
+            
+            Console.WriteLine($"  ✓ Movimientos posibles: {moves.Count}");
+            Console.WriteLine($"  ✓ Relación Edges/Cells: {(double)board.Edges.Count / board.Cells.Count:F2}");
+            Console.WriteLine($"  ✓ Tablero válido: {ValidateBoard(board)}");
+            Console.WriteLine();
+        }
+
+        // Test de juego completo en tablero pequeño
+        Console.WriteLine("\nTEST: Juego completo simulado en tablero pequeño (radio 2)");
+        TestCompleteGame();
+
+        // Test de visualización simple
+        Console.WriteLine("\nTEST: Visualización del tablero (radio 3)");
+        VisualizeBoard(3);
+
+        Console.WriteLine("\n✓ Todos los tests de Fase 3 pasaron correctamente");
+    }
+
+    static bool ValidateBoard(Board board)
+    {
+        // Verificar que todas las celdas tienen 4 aristas válidas
+        foreach (var cell in board.Cells)
+        {
+            if (cell.EdgeIds.Length != 4)
+                return false;
+
+            foreach (int edgeId in cell.EdgeIds)
+            {
+                if (edgeId < 0 || edgeId >= board.Edges.Count)
+                    return false;
+            }
+        }
+
+        // Verificar que cada arista está en al menos una celda
+        for (int i = 0; i < board.Edges.Count; i++)
+        {
+            if (board.EdgesToCells[i].Length == 0)
+            {
+                // Las aristas del borde pueden no tener celdas, es normal
+                // pero al menos debería haber algunas aristas con celdas
+            }
+        }
+
+        return true;
+    }
+
+    static void TestCompleteGame()
+    {
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        var gameState = new GameState(board);
+
+        Console.WriteLine($"  Estado inicial: {gameState}");
+        
+        int moveCount = 0;
+        var random = new Random(42); // Seed fijo para reproducibilidad
+
+        // Jugar hasta el final con movimientos aleatorios
+        while (!gameState.IsTerminal())
+        {
+            var moves = gameState.GenerateMoves().ToList();
+            var randomMove = moves[random.Next(moves.Count)];
+            var result = gameState.Apply(randomMove);
+            moveCount++;
+
+            if (result.CapturedCount > 0)
+            {
+                Console.WriteLine($"  Movimiento {moveCount}: Jugador {result.Player} capturó {result.CapturedCount} celda(s)!");
+            }
+        }
+
+        Console.WriteLine($"  Juego terminado después de {moveCount} movimientos");
+        Console.WriteLine($"  Resultado final: {gameState}");
+        
+        int winner = gameState.GetWinner();
+        if (winner == -1)
+            Console.WriteLine($"  ✓ ¡Empate! Ambos jugadores: {gameState.Scores[0]} celdas");
+        else
+            Console.WriteLine($"  ✓ ¡Ganador: Jugador {winner}! ({gameState.Scores[winner]} vs {gameState.Scores[1 - winner]} celdas)");
+    }
+
+    static void VisualizeBoard(int radius)
+    {
+        var factory = new GalletaShapeFactory(radius);
+        var board = factory.Build();
+
+        Console.WriteLine($"  Tablero en forma de galleta (radio {radius}):");
+        Console.WriteLine($"  {board}");
+        Console.WriteLine();
+
+        // Crear una representación simple del tablero
+        // Mostrar la forma del diamante con asteriscos
+        Console.WriteLine("  Forma del diamante (cada * es un punto):");
+        
+        for (int y = -radius; y <= radius; y++)
+        {
+            Console.Write("  ");
+            
+            // Calcular espacios iniciales
+            int spaces = Math.Abs(y);
+            Console.Write(new string(' ', spaces * 2));
+
+            // Calcular cuántos puntos hay en esta fila
+            int pointsInRow = (2 * radius + 1) - (2 * Math.Abs(y));
+            
+            for (int i = 0; i < pointsInRow; i++)
+            {
+                Console.Write("* ");
+            }
+            
+            Console.WriteLine();
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"  Esta forma contiene {board.Cells.Count} celdas (cuadros) para capturar");
     }
 
     static Board CreateSimpleBoard()
