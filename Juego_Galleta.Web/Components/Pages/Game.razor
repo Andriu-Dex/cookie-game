@@ -101,11 +101,21 @@
                         var (x1, y1, x2, y2) = GetEdgeCoordinates(edge);
                         var isDrawn = _gameState.EdgesTaken[edge.Id];
                         
+                        @if (!isDrawn)
+                        {
+                            <!-- Invisible clickable area (wider) -->
+                            <line x1="@x1" y1="@y1" x2="@x2" y2="@y2" 
+                                  stroke="transparent"
+                                  stroke-width="20"
+                                  @onclick="() => OnEdgeClick(edge)"
+                                  style="cursor: pointer; pointer-events: stroke;" />
+                        }
+                        
+                        <!-- Visible line -->
                         <line x1="@x1" y1="@y1" x2="@x2" y2="@y2" 
-                              class="@GetEdgeClass(isDrawn)"
+                              class="@GetEdgeClass(edge.Id)"
                               stroke-width="@(isDrawn ? 6 : 4)" 
-                              @onclick="() => OnEdgeClick(edge)"
-                              style="cursor: @(CanPlayEdge(edge) ? "pointer" : "default")" />
+                              style="pointer-events: none;" />
                     }
 
                     <!-- Cells (cuadrados completados) -->
@@ -115,12 +125,12 @@
                         if (owner >= 0)
                         {
                             var (cx, cy) = GetCellCenter(cell);
-                            <rect x="@(cx - _cellSize / 2 + 2)" 
-                                  y="@(cy - _cellSize / 2 + 2)" 
-                                  width="@(_cellSize - 4)" 
-                                  height="@(_cellSize - 4)" 
+                            <rect x="@(cx - _cellSize / 2 + 5)" 
+                                  y="@(cy - _cellSize / 2 + 5)" 
+                                  width="@(_cellSize - 10)" 
+                                  height="@(_cellSize - 10)" 
                                   class="@GetCellClass(owner)"
-                                  rx="4" />
+                                  rx="6" />
                         }
                     }
 
@@ -148,6 +158,7 @@
     
     // For rendering
     private Dictionary<int, (int x, int y)> _vertexPositions = new();
+    private int[] _edgeOwners = null!; // Track which player drew each edge
     
     private bool _gameStarted = false;
     private bool _gameOver = false;
@@ -172,6 +183,10 @@
         var factory = new GalletaShapeFactory(_selectedRadius);
         _board = factory.Build();
         _gameState = new GameState(_board, 0);
+        
+        // Initialize edge owners (-1 means not drawn yet)
+        _edgeOwners = new int[_board.Edges.Count];
+        Array.Fill(_edgeOwners, -1);
         
         // Calculate vertex positions
         CalculateVertexPositions();
@@ -270,6 +285,9 @@
 
     private void MakeMove(Move move)
     {
+        // Record which player made this move
+        _edgeOwners[move.EdgeId] = _gameState.CurrentPlayer;
+        
         _gameState.Apply(move);
         
         if (_gameState.IsTerminal())
@@ -291,8 +309,17 @@
         _isThinking = false;
         StateHasChanged();
         
-        // If AI vs AI and game not over, continue
-        if (_selectedGameMode == 2 && !_gameOver)
+        // Check if game is over
+        if (_gameOver) return;
+        
+        // If current player is still AI (captured a cell), continue playing
+        if (IsCurrentPlayerAI())
+        {
+            await Task.Delay(800); // Slightly longer delay between consecutive moves
+            await MakeAIMove();
+        }
+        // For AI vs AI mode, if next player is also AI, continue
+        else if (_selectedGameMode == 2)
         {
             await Task.Delay(1000);
             await MakeAIMove();
@@ -301,7 +328,7 @@
 
     private bool IsCurrentPlayerAI()
     {
-        return _gameState.CurrentPlayer == 1 ? _isPlayer1AI : _isPlayer2AI;
+        return _gameState.CurrentPlayer == 0 ? _isPlayer1AI : _isPlayer2AI;
     }
 
     private bool CanPlayEdge(Edge edge)
@@ -312,12 +339,11 @@
         return true;
     }
 
-    private string GetEdgeClass(bool isDrawn)
+    private string GetEdgeClass(int edgeId)
     {
-        // For simplicity, all edges are drawn in a neutral color
-        // In future could track which player drew which edge
-        if (!isDrawn) return "edge-available";
-        return "edge-player1"; // Use a neutral drawn color
+        var owner = _edgeOwners[edgeId];
+        if (owner == -1) return "edge-available";
+        return owner == 0 ? "edge-player1" : "edge-player2";
     }
 
     private string GetCellClass(int owner)

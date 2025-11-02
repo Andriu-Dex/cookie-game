@@ -283,15 +283,15 @@
 
 /* Cells */
 .cell-player1 {
-  fill: rgba(102, 126, 234, 0.3);
-  stroke: #667eea;
-  stroke-width: 2;
+  fill: rgba(102, 126, 234, 0.15);
+  stroke: none;
+  pointer-events: none;
 }
 
 .cell-player2 {
-  fill: rgba(245, 87, 108, 0.3);
-  stroke: #f5576c;
-  stroke-width: 2;
+  fill: rgba(245, 87, 108, 0.15);
+  stroke: none;
+  pointer-events: none;
 }
 
 /* Vertices */
