@@ -122,19 +122,18 @@
                               style="pointer-events: none;" />
                     }
 
-                    <!-- Cells (cuadrados completados) -->
+                    <!-- Cells (cuadrados completados con emojis) -->
                     @foreach (var cell in _board.Cells)
                     {
                         var owner = _gameState.CellOwners[cell.Id];
                         if (owner >= 0)
                         {
                             var (cx, cy) = GetCellCenter(cell);
-                            <rect x="@(cx - _cellSize / 2 + 5)" 
-                                  y="@(cy - _cellSize / 2 + 5)" 
-                                  width="@(_cellSize - 10)" 
-                                  height="@(_cellSize - 10)" 
-                                  class="@GetCellClass(owner)"
-                                  rx="6" />
+                            var emoji = owner == 0 ? "🔵" : "🔴";
+                            var fontSize = _cellSize * 0.6;
+                            <g>
+                                <text x="@cx" y="@cy" class="cell-emoji" text-anchor="middle" dominant-baseline="central" font-size="@fontSize">@emoji</text>
+                            </g>
                         }
                     }
 
@@ -369,11 +368,6 @@
         return owner == 0 ? "edge-player1" : "edge-player2";
     }
 
-    private string GetCellClass(int owner)
-    {
-        return owner == 0 ? "cell-player1" : "cell-player2";
-    }
-
     private (int x, int y) GetVertexCoordinates(int vertexIndex)
     {
         var (gridX, gridY) = _vertexPositions[vertexIndex];
@@ -407,23 +401,17 @@
             vertexSet.Add(edge.VertexB);
         }
         
-        // Calculate center from vertex positions
+        // Calculate center from actual SVG coordinates (not grid positions)
         int sumX = 0, sumY = 0;
         foreach (var vertexIdx in vertexSet)
         {
-            var (gridX, gridY) = _vertexPositions[vertexIdx];
-            sumX += gridX;
-            sumY += gridY;
+            var (x, y) = GetVertexCoordinates(vertexIdx);
+            sumX += x;
+            sumY += y;
         }
         
-        int avgGridX = sumX / vertexSet.Count;
-        int avgGridY = sumY / vertexSet.Count;
-        
-        int centerX = _svgWidth / 2;
-        int centerY = _svgHeight / 2;
-        
-        int cx = centerX + avgGridX * _cellSize;
-        int cy = centerY + avgGridY * _cellSize;
+        int cx = sumX / vertexSet.Count;
+        int cy = sumY / vertexSet.Count;
         
         return (cx, cy);
     }

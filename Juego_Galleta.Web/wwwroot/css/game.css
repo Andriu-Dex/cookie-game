@@ -344,17 +344,25 @@
   stroke-linecap: round;
 }
 
-/* Cells */
-.cell-player1 {
-  fill: rgba(102, 126, 234, 0.15);
-  stroke: none;
+/* Cells - Emojis que representan los cuadrados completados */
+.cell-emoji {
   pointer-events: none;
+  user-select: none;
+  animation: popIn 0.3s ease-out;
 }
 
-.cell-player2 {
-  fill: rgba(245, 87, 108, 0.15);
-  stroke: none;
-  pointer-events: none;
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Vertices */
