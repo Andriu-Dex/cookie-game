@@ -265,22 +265,18 @@ dotnet build
 - **Arquitectura**: Clean Architecture - Robert C. Martin
 - **Principios**: SOLID Principles
 
-## 👥 Autores
+## 👥 Autor
 
-**Proyecto Académico**  
-Universidad UTA - Ingeniería de Software  
-Semestre 5 - Patrones de Software  
-Parcial 2 - Noviembre 2025
+Andriu Dex
 
 ## 📝 Licencia
 
-Proyecto académico con fines educativos.
+Este proyecto está licenciado bajo los términos de la **MIT License**.  
+Consulta el archivo [LICENSE](./LICENSE) para más información.
 
 ---
 
-## 🎯 Conclusiones
-
-Este proyecto demuestra:
+## Este proyecto demuestra:
 
 1. ✅ **Arquitectura limpia** y modular
 2. ✅ **Principios SOLID** aplicados correctamente
