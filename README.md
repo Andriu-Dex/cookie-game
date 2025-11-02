@@ -7,6 +7,12 @@ Universidad UTA - Ingeniería de Software
 
 Implementación completa del juego "Dots and Boxes" (Juego de la Galleta) con Inteligencia Artificial basada en el algoritmo **Minimax con poda Alpha-Beta**. El proyecto sigue principios de **Clean Architecture**, **SOLID** y patrones de diseño clásicos.
 
+![alt text](Juego_Galleta/img/home.png)
+
+![alt text](Juego_Galleta/img/game-menu.png)
+
+![alt text](Juego_Galleta/img/cokkie-game.png)
+
 ## 🎮 Características
 
 ### Modos de Juego
@@ -56,10 +62,9 @@ Juego_Galleta/
 │       └── AIPlayer.cs              # Jugador IA
 │
 ├── Presentation/        # Interfaz de usuario
-│   ├── BoardRenderer.cs      # Renderizado del tablero
-│   └── GameController.cs     # Controlador del juego
-│
-└── Infrastructure/      # Utilidades (vacío por ahora)
+    ├── BoardRenderer.cs      # Renderizado del tablero
+    └── GameController.cs     # Controlador del juego
+
 ```
 
 ## 🎯 Principios SOLID Aplicados
@@ -284,5 +289,3 @@ Este proyecto demuestra:
 5. ✅ **Código mantenible** y extensible
 6. ✅ **Alto rendimiento** (99.8% eficiencia de poda)
 7. ✅ **Documentación completa** en español
-
-**¡El proyecto está listo para presentación académica!** 🎓

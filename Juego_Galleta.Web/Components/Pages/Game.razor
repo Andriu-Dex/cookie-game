@@ -33,6 +33,26 @@
                 </select>
             </div>
 
+            @if (_selectedGameMode == 1)
+            {
+                <div class="config-group">
+                    <label>Nombre del Jugador:</label>
+                    <input type="text" @bind="_player1Name" class="form-input" placeholder="Ingresa tu nombre" maxlength="20" />
+                </div>
+            }
+
+            @if (_selectedGameMode == 3)
+            {
+                <div class="config-group">
+                    <label>Nombre del Jugador 1:</label>
+                    <input type="text" @bind="_player1Name" class="form-input" placeholder="Jugador 1" maxlength="20" />
+                </div>
+                <div class="config-group">
+                    <label>Nombre del Jugador 2:</label>
+                    <input type="text" @bind="_player2Name" class="form-input" placeholder="Jugador 2" maxlength="20" />
+                </div>
+            }
+
             @if (_selectedGameMode == 1 || _selectedGameMode == 2)
             {
                 <div class="config-group">
@@ -56,12 +76,12 @@
                 <div class="score-panel">
                     <div class="player-score @(_gameState.CurrentPlayer == 0 ? "active" : "")">
                         <span class="player-icon">🔵</span>
-                        <span class="player-label">Jugador 1</span>
+                        <span class="player-label">@GetPlayerName(0)</span>
                         <span class="score">@_gameState.Scores[0]</span>
                     </div>
                     <div class="player-score @(_gameState.CurrentPlayer == 1 ? "active" : "")">
                         <span class="player-icon">🔴</span>
-                        <span class="player-label">Jugador 2</span>
+                        <span class="player-label">@GetPlayerName(1)</span>
                         <span class="score">@_gameState.Scores[1]</span>
                     </div>
                 </div>
@@ -72,6 +92,16 @@
                         <h2>🎉 ¡Juego Terminado!</h2>
                         <p class="winner-text">@GetWinnerText()</p>
                         <button @onclick="ResetGame" class="btn btn-success">🔄 Nuevo Juego</button>
+                    </div>
+                    
+                    <!-- Confeti animado -->
+                    <div class="confetti-container">
+                        @for (int i = 0; i < 50; i++)
+                        {
+                            var delay = (i * 0.05);
+                            var left = (i * 2);
+                            <div class="confetti" style="left: @(left)%; animation-delay: @(delay)s;"></div>
+                        }
                     </div>
                 }
             </div>
@@ -131,8 +161,16 @@
                             var (cx, cy) = GetCellCenter(cell);
                             var emoji = owner == 0 ? "🔵" : "🔴";
                             var fontSize = _cellSize * 0.6;
+                            var shouldAnimate = !_animatedCells.Contains(cell.Id);
+                            var animClass = shouldAnimate ? "cell-emoji cell-emoji-animate" : "cell-emoji";
+                            
+                            if (shouldAnimate)
+                            {
+                                _animatedCells.Add(cell.Id);
+                            }
+                            
                             <g>
-                                <text x="@cx" y="@cy" class="cell-emoji" text-anchor="middle" dominant-baseline="central" font-size="@fontSize">@emoji</text>
+                                <text x="@cx" y="@cy" class="@animClass" text-anchor="middle" dominant-baseline="central" font-size="@fontSize">@emoji</text>
                             </g>
                         }
                     }
@@ -162,6 +200,7 @@
     // For rendering
     private Dictionary<int, (int x, int y)> _vertexPositions = new();
     private int[] _edgeOwners = null!; // Track which player drew each edge
+    private HashSet<int> _animatedCells = new(); // Track which cells have been animated
     
     private bool _gameStarted = false;
     private bool _gameOver = false;
@@ -173,6 +212,10 @@
     
     private bool _isPlayer1AI = false;
     private bool _isPlayer2AI = false;
+    
+    // Player names
+    private string _player1Name = "";
+    private string _player2Name = "";
 
     // SVG parameters
     private const int _cellSize = 60;
@@ -191,6 +234,15 @@
         _edgeOwners = new int[_board.Edges.Count];
         Array.Fill(_edgeOwners, -1);
         
+        // Reset animated cells tracker
+        _animatedCells.Clear();
+        
+        // Set default names if not provided
+        if (string.IsNullOrWhiteSpace(_player1Name))
+            _player1Name = _selectedGameMode == 1 ? "Jugador" : "Jugador 1";
+        if (string.IsNullOrWhiteSpace(_player2Name))
+            _player2Name = _selectedGameMode == 2 ? "IA 2" : (_selectedGameMode == 1 ? "IA" : "Jugador 2");
+        
         // Calculate vertex positions
         CalculateVertexPositions();
         
@@ -208,6 +260,8 @@
             case 2: // AI vs AI
                 _isPlayer1AI = true;
                 _isPlayer2AI = true;
+                _player1Name = "IA 1";
+                _player2Name = "IA 2";
                 break;
             case 3: // Human vs Human
                 _isPlayer1AI = false;
@@ -416,12 +470,17 @@
         return (cx, cy);
     }
 
+    private string GetPlayerName(int playerIndex)
+    {
+        return playerIndex == 0 ? _player1Name : _player2Name;
+    }
+
     private string GetWinnerText()
     {
         if (_gameState.Scores[0] > _gameState.Scores[1])
-            return "🏆 ¡Jugador 1 Gana!";
+            return $"🏆 ¡{_player1Name} Gana!";
         else if (_gameState.Scores[1] > _gameState.Scores[0])
-            return "🏆 ¡Jugador 2 Gana!";
+            return $"🏆 ¡{_player2Name} Gana!";
         else
             return "🤝 ¡Empate!";
     }
@@ -431,5 +490,7 @@
         _gameStarted = false;
         _gameOver = false;
         _isThinking = false;
+        _player1Name = "";
+        _player2Name = "";
     }
 }
