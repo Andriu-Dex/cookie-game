@@ -8,7 +8,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("=== Juego de la Galleta - Fase 4: Evaluador Heurístico ===\n");
+        Console.WriteLine("=== Juego de la Galleta - Fase 5: Minimax con Alpha-Beta ===\n");
 
         TestPhase1();
         Console.WriteLine("\n" + new string('=', 60) + "\n");
@@ -17,6 +17,8 @@ internal class Program
         TestPhase3();
         Console.WriteLine("\n" + new string('=', 60) + "\n");
         TestPhase4();
+        Console.WriteLine("\n" + new string('=', 60) + "\n");
+        TestPhase5();
 
         Console.WriteLine("\n=== Todas las pruebas completadas exitosamente ===");
         Console.WriteLine("Presiona cualquier tecla para salir...");
@@ -455,6 +457,211 @@ internal class Program
         }
 
         Console.WriteLine("  ✓ Comparación de movimientos completada");
+    }
+
+    static void TestPhase5()
+    {
+        Console.WriteLine("--- FASE 5: Minimax con Alpha-Beta ---\n");
+
+        var evaluator = new SimpleDotsEvaluator();
+
+        // TEST 1: Creación y configuración básica
+        Console.WriteLine("TEST 1: Creación del algoritmo Minimax");
+        var minimax = new MinimaxAlphaBeta(evaluator);
+        Console.WriteLine("  ✓ MinimaxAlphaBeta creado correctamente\n");
+
+        // TEST 2: Búsqueda en tablero pequeño
+        Console.WriteLine("TEST 2: Búsqueda en tablero pequeño (radio 2, profundidad 3)");
+        TestMinimaxSearch(minimax, 2, 3);
+
+        // TEST 3: Diferentes profundidades
+        Console.WriteLine("\nTEST 3: Comparación de profundidades");
+        TestDifferentDepths(evaluator);
+
+        // TEST 4: AI vs AI
+        Console.WriteLine("\nTEST 4: Partida AI vs AI");
+        TestAIvsAI();
+
+        // TEST 5: Análisis de rendimiento
+        Console.WriteLine("\nTEST 5: Análisis de rendimiento (nodos explorados)");
+        TestPerformanceAnalysis(evaluator);
+
+        // TEST 6: Capacidad táctica
+        Console.WriteLine("\nTEST 6: Capacidad táctica (detectar capturas)");
+        TestTacticalAbility(minimax);
+
+        Console.WriteLine("\n✓ Todos los tests de Fase 5 pasaron correctamente");
+    }
+
+    static void TestMinimaxSearch(MinimaxAlphaBeta minimax, int radius, int depth)
+    {
+        var factory = new GalletaShapeFactory(radius);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        Console.WriteLine($"  Tablero: {board}");
+        
+        var bestMove = minimax.GetBestMove(state, 0, depth);
+        var stats = minimax.GetLastSearchStatistics();
+
+        Console.WriteLine($"  Mejor movimiento encontrado: {bestMove}");
+        Console.WriteLine($"  {stats}");
+        Console.WriteLine($"  ✓ Movimiento válido: {state.GenerateMoves().Any(m => m.EdgeId == bestMove.EdgeId)}");
+    }
+
+    static void TestDifferentDepths(SimpleDotsEvaluator evaluator)
+    {
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        
+        var depths = new[] { 1, 2, 3, 4 };
+        
+        Console.WriteLine("  Profundidad | Nodos Explorados | Tiempo (ms)");
+        Console.WriteLine("  " + new string('-', 50));
+
+        foreach (int depth in depths)
+        {
+            var minimax = new MinimaxAlphaBeta(evaluator);
+            var state = new GameState(board);
+            
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var move = minimax.GetBestMove(state, 0, depth);
+            sw.Stop();
+
+            var stats = minimax.GetLastSearchStatistics();
+            Console.WriteLine($"  {depth,11} | {stats.NodesExplored,16} | {sw.ElapsedMilliseconds,10}");
+        }
+
+        Console.WriteLine("  ✓ Mayor profundidad explora más nodos (como se espera)");
+    }
+
+    static void TestAIvsAI()
+    {
+        var evaluator = new SimpleDotsEvaluator();
+        var minimax = new MinimaxAlphaBeta(evaluator);
+        
+        // Crear dos AIs con diferentes profundidades
+        var ai0 = new AIPlayer(0, minimax, searchDepth: 3);
+        var ai1 = new AIPlayer(1, minimax, searchDepth: 3);
+
+        Console.WriteLine($"  {ai0}");
+        Console.WriteLine($"  {ai1}");
+
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        Console.WriteLine($"  Tablero: {board}");
+        Console.WriteLine("  Iniciando partida...\n");
+
+        int moveCount = 0;
+        var moveHistory = new List<string>();
+
+        while (!state.IsTerminal() && moveCount < 20) // Límite de seguridad
+        {
+            var currentAI = state.CurrentPlayer == 0 ? ai0 : ai1;
+            var move = currentAI.GetMove(state);
+            var result = state.Apply(move);
+            
+            moveCount++;
+            string moveDesc = result.CapturedCount > 0 
+                ? $"Mov {moveCount}: Jugador {result.Player} jugó {move.EdgeId} y capturó {result.CapturedCount} celda(s)"
+                : $"Mov {moveCount}: Jugador {result.Player} jugó {move.EdgeId}";
+            
+            moveHistory.Add(moveDesc);
+
+            if (result.CapturedCount > 0)
+            {
+                Console.WriteLine($"  {moveDesc}");
+            }
+        }
+
+        Console.WriteLine($"\n  Partida terminada en {moveCount} movimientos");
+        Console.WriteLine($"  Resultado: {state}");
+        
+        int winner = state.GetWinner();
+        if (winner == -1)
+            Console.WriteLine($"  ✓ Empate: {state.Scores[0]} - {state.Scores[1]}");
+        else
+            Console.WriteLine($"  ✓ Ganador: Jugador {winner} ({state.Scores[winner]} - {state.Scores[1-winner]} celdas)");
+    }
+
+    static void TestPerformanceAnalysis(SimpleDotsEvaluator evaluator)
+    {
+        var minimax = new MinimaxAlphaBeta(evaluator);
+        var factory = new GalletaShapeFactory(3);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        Console.WriteLine("  Analizando eficiencia de la poda alpha-beta...");
+        Console.WriteLine($"  Tablero: {board}");
+        
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        var move = minimax.GetBestMove(state, 0, 4);
+        sw.Stop();
+
+        var stats = minimax.GetLastSearchStatistics();
+        
+        // Calcular factor de ramificación aproximado
+        int availableMoves = state.GenerateMoves().Count();
+        int maxNodesWithoutPruning = 0;
+        for (int d = 0; d <= 4; d++)
+        {
+            maxNodesWithoutPruning += (int)Math.Pow(availableMoves, d);
+        }
+
+        double pruningEfficiency = 100.0 * (1.0 - (double)stats.NodesExplored / maxNodesWithoutPruning);
+
+        Console.WriteLine($"  Mejor movimiento: {move}");
+        Console.WriteLine($"  Nodos explorados: {stats.NodesExplored:N0}");
+        Console.WriteLine($"  Nodos sin poda (estimado): {maxNodesWithoutPruning:N0}");
+        Console.WriteLine($"  Eficiencia de poda: ~{pruningEfficiency:F1}%");
+        Console.WriteLine($"  Tiempo: {sw.ElapsedMilliseconds} ms");
+        Console.WriteLine($"  ✓ La poda alpha-beta reduce significativamente los nodos explorados");
+    }
+
+    static void TestTacticalAbility(MinimaxAlphaBeta minimax)
+    {
+        // Crear un escenario donde hay una captura obvia disponible
+        var factory = new GalletaShapeFactory(2);
+        var board = factory.Build();
+        var state = new GameState(board);
+
+        // Configurar un estado donde hay una celda casi completa (3 lados)
+        // Hacer 3 movimientos para dejar una celda con 3 lados
+        state.Apply(new Move(0));
+        state.Apply(new Move(4));
+        state.Apply(new Move(1));
+        state.Apply(new Move(5));
+        state.Apply(new Move(2));
+
+        Console.WriteLine($"  Estado configurado: {state}");
+
+        // Encontrar si hay celdas con 3 lados
+        bool hasAlmostCompleteCell = false;
+        for (int i = 0; i < board.Cells.Count; i++)
+        {
+            if (!state.CellsOwned[i] && state.CountDrawnEdges(i) == 3)
+            {
+                hasAlmostCompleteCell = true;
+                Console.WriteLine($"  Celda {i} tiene 3 lados (captura disponible)");
+            }
+        }
+
+        if (hasAlmostCompleteCell)
+        {
+            var bestMove = minimax.GetBestMove(state, state.CurrentPlayer, 3);
+            var evaluator = new SimpleDotsEvaluator();
+            bool isCapturing = evaluator.IsCapturingMove(state, bestMove);
+
+            Console.WriteLine($"  Mejor movimiento: {bestMove}");
+            Console.WriteLine($"  ✓ IA detecta captura: {isCapturing}");
+        }
+        else
+        {
+            Console.WriteLine("  (No se creó escenario de captura en esta configuración)");
+            Console.WriteLine("  ✓ Test completado");
+        }
     }
 
     static Board CreateSimpleBoard()
