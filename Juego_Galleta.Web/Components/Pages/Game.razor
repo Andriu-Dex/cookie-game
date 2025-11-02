@@ -1,0 +1,398 @@
+@page "/game"
+@using Juego_Galleta.Domain.Entities
+@using Juego_Galleta.Domain.Interfaces
+@using Juego_Galleta.Application.AI
+@rendermode InteractiveServer
+
+<PageTitle>Juego de la Galleta - Dots and Boxes</PageTitle>
+
+<div class="game-container">
+    <h1 class="game-title">🎮 Juego de la Galleta</h1>
+    
+    @if (!_gameStarted)
+    {
+        <div class="menu-container">
+            <h2>Configuración del Juego</h2>
+            
+            <div class="config-group">
+                <label>Tamaño del Tablero (Radio):</label>
+                <select @bind="_selectedRadius" class="form-select">
+                    <option value="2">Pequeño (Radio 2)</option>
+                    <option value="3">Mediano (Radio 3)</option>
+                    <option value="4">Grande (Radio 4)</option>
+                    <option value="5">Extra Grande (Radio 5)</option>
+                </select>
+            </div>
+
+            <div class="config-group">
+                <label>Modo de Juego:</label>
+                <select @bind="_selectedGameMode" class="form-select">
+                    <option value="1">👤 Humano vs 🤖 IA</option>
+                    <option value="2">🤖 IA vs 🤖 IA</option>
+                    <option value="3">👤 Humano vs 👤 Humano</option>
+                </select>
+            </div>
+
+            @if (_selectedGameMode == 1 || _selectedGameMode == 2)
+            {
+                <div class="config-group">
+                    <label>Dificultad de la IA:</label>
+                    <select @bind="_selectedDepth" class="form-select">
+                        <option value="2">Fácil (Profundidad 2)</option>
+                        <option value="3">Normal (Profundidad 3)</option>
+                        <option value="4">Difícil (Profundidad 4)</option>
+                        <option value="5">Experto (Profundidad 5)</option>
+                    </select>
+                </div>
+            }
+
+            <button @onclick="StartGame" class="btn btn-primary btn-lg">🎯 Iniciar Juego</button>
+        </div>
+    }
+    else
+    {
+        <div class="game-board-container">
+            <div class="game-info">
+                <div class="score-panel">
+                    <div class="player-score @(_gameState.CurrentPlayer == 0 ? "active" : "")">
+                        <span class="player-icon">🔵</span>
+                        <span class="player-label">Jugador 1</span>
+                        <span class="score">@_gameState.Scores[0]</span>
+                    </div>
+                    <div class="player-score @(_gameState.CurrentPlayer == 1 ? "active" : "")">
+                        <span class="player-icon">🔴</span>
+                        <span class="player-label">Jugador 2</span>
+                        <span class="score">@_gameState.Scores[1]</span>
+                    </div>
+                </div>
+
+                @if (_gameOver)
+                {
+                    <div class="game-over-panel">
+                        <h2>🎉 ¡Juego Terminado!</h2>
+                        <p class="winner-text">@GetWinnerText()</p>
+                        <button @onclick="ResetGame" class="btn btn-success">🔄 Nuevo Juego</button>
+                    </div>
+                }
+                else if (_isThinking)
+                {
+                    <div class="thinking-panel">
+                        <div class="spinner"></div>
+                        <p>🤖 IA pensando...</p>
+                    </div>
+                }
+            </div>
+
+            <div class="board-wrapper">
+                <svg width="@_svgWidth" height="@_svgHeight" class="game-board">
+                    <!-- Grid Lines (fondo) -->
+                    @foreach (var edge in _board.Edges)
+                    {
+                        var (x1, y1, x2, y2) = GetEdgeCoordinates(edge);
+                        <line x1="@x1" y1="@y1" x2="@x2" y2="@y2" 
+                              class="grid-line" 
+                              stroke-width="1" 
+                              stroke="#ddd" />
+                    }
+
+                    <!-- Edges (líneas jugables) -->
+                    @foreach (var edge in _board.Edges)
+                    {
+                        var (x1, y1, x2, y2) = GetEdgeCoordinates(edge);
+                        var isDrawn = _gameState.EdgesTaken[edge.Id];
+                        
+                        <line x1="@x1" y1="@y1" x2="@x2" y2="@y2" 
+                              class="@GetEdgeClass(isDrawn)"
+                              stroke-width="@(isDrawn ? 6 : 4)" 
+                              @onclick="() => OnEdgeClick(edge)"
+                              style="cursor: @(CanPlayEdge(edge) ? "pointer" : "default")" />
+                    }
+
+                    <!-- Cells (cuadrados completados) -->
+                    @foreach (var cell in _board.Cells)
+                    {
+                        var owner = _gameState.CellOwners[cell.Id];
+                        if (owner >= 0)
+                        {
+                            var (cx, cy) = GetCellCenter(cell);
+                            <rect x="@(cx - _cellSize / 2 + 2)" 
+                                  y="@(cy - _cellSize / 2 + 2)" 
+                                  width="@(_cellSize - 4)" 
+                                  height="@(_cellSize - 4)" 
+                                  class="@GetCellClass(owner)"
+                                  rx="4" />
+                        }
+                    }
+
+                    <!-- Vertices (puntos) -->
+                    @foreach (var vertexIdx in _vertexPositions.Keys)
+                    {
+                        var (x, y) = GetVertexCoordinates(vertexIdx);
+                        <circle cx="@x" cy="@y" r="5" class="vertex" />
+                    }
+                </svg>
+            </div>
+
+            <div class="controls">
+                <button @onclick="ResetGame" class="btn btn-secondary">🏠 Menú Principal</button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private Board _board = null!;
+    private GameState _gameState = null!;
+    private IEvaluator _evaluator = null!;
+    private ISearchStrategy _searchStrategy = null!;
+    
+    // For rendering
+    private Dictionary<int, (int x, int y)> _vertexPositions = new();
+    
+    private bool _gameStarted = false;
+    private bool _gameOver = false;
+    private bool _isThinking = false;
+    
+    private int _selectedRadius = 3;
+    private int _selectedGameMode = 1;
+    private int _selectedDepth = 3;
+    
+    private bool _isPlayer1AI = false;
+    private bool _isPlayer2AI = false;
+
+    // SVG parameters
+    private const int _cellSize = 60;
+    private const int _padding = 40;
+    private int _svgWidth = 600;
+    private int _svgHeight = 600;
+
+    private void StartGame()
+    {
+        // Generate board
+        var factory = new GalletaShapeFactory(_selectedRadius);
+        _board = factory.Build();
+        _gameState = new GameState(_board, 0);
+        
+        // Calculate vertex positions
+        CalculateVertexPositions();
+        
+        // Configure AI
+        _evaluator = new SimpleDotsEvaluator();
+        _searchStrategy = new MinimaxAlphaBeta(_evaluator);
+        
+        // Configure game mode
+        switch (_selectedGameMode)
+        {
+            case 1: // Human vs AI
+                _isPlayer1AI = false;
+                _isPlayer2AI = true;
+                break;
+            case 2: // AI vs AI
+                _isPlayer1AI = true;
+                _isPlayer2AI = true;
+                break;
+            case 3: // Human vs Human
+                _isPlayer1AI = false;
+                _isPlayer2AI = false;
+                break;
+        }
+
+        // Calculate SVG size
+        CalculateSVGSize();
+        
+        _gameStarted = true;
+        _gameOver = false;
+
+        // If first player is AI, make move
+        if (_isPlayer1AI)
+        {
+            _ = MakeAIMove();
+        }
+    }
+
+    private void CalculateVertexPositions()
+    {
+        // Recreate the same logic as GalletaShapeFactory to get Point2D positions
+        var points = new List<(int index, int x, int y)>();
+        
+        for (int y = -_selectedRadius; y <= _selectedRadius; y++)
+        {
+            for (int x = -_selectedRadius; x <= _selectedRadius; x++)
+            {
+                if (Math.Abs(x) + Math.Abs(y) <= _selectedRadius)
+                {
+                    points.Add((points.Count, x, y));
+                }
+            }
+        }
+        
+        // Sort the same way as in GalletaShapeFactory
+        points.Sort((a, b) =>
+        {
+            int yCompare = a.y.CompareTo(b.y);
+            return yCompare != 0 ? yCompare : a.x.CompareTo(b.x);
+        });
+        
+        // Create mapping
+        _vertexPositions.Clear();
+        for (int i = 0; i < points.Count; i++)
+        {
+            _vertexPositions[i] = (points[i].x, points[i].y);
+        }
+    }
+
+    private void CalculateSVGSize()
+    {
+        int maxX = 0, maxY = 0;
+        foreach (var (x, y) in _vertexPositions.Values)
+        {
+            if (Math.Abs(x) > maxX) maxX = Math.Abs(x);
+            if (Math.Abs(y) > maxY) maxY = Math.Abs(y);
+        }
+        
+        _svgWidth = (maxX * 2 + 1) * _cellSize + _padding * 2;
+        _svgHeight = (maxY * 2 + 1) * _cellSize + _padding * 2;
+    }
+
+    private async Task OnEdgeClick(Edge edge)
+    {
+        if (!CanPlayEdge(edge)) return;
+        
+        var move = new Move(edge.Id);
+        MakeMove(move);
+        
+        // If game not over and next player is AI, make AI move
+        if (!_gameOver && IsCurrentPlayerAI())
+        {
+            await MakeAIMove();
+        }
+    }
+
+    private void MakeMove(Move move)
+    {
+        _gameState.Apply(move);
+        
+        if (_gameState.IsTerminal())
+        {
+            _gameOver = true;
+        }
+    }
+
+    private async Task MakeAIMove()
+    {
+        _isThinking = true;
+        StateHasChanged();
+        
+        await Task.Delay(500); // Small delay for visual effect
+        
+        var move = _searchStrategy.GetBestMove(_gameState, _gameState.CurrentPlayer, _selectedDepth);
+        MakeMove(move);
+        
+        _isThinking = false;
+        StateHasChanged();
+        
+        // If AI vs AI and game not over, continue
+        if (_selectedGameMode == 2 && !_gameOver)
+        {
+            await Task.Delay(1000);
+            await MakeAIMove();
+        }
+    }
+
+    private bool IsCurrentPlayerAI()
+    {
+        return _gameState.CurrentPlayer == 1 ? _isPlayer1AI : _isPlayer2AI;
+    }
+
+    private bool CanPlayEdge(Edge edge)
+    {
+        if (_gameOver || _isThinking) return false;
+        if (_gameState.EdgesTaken[edge.Id]) return false;
+        if (IsCurrentPlayerAI()) return false;
+        return true;
+    }
+
+    private string GetEdgeClass(bool isDrawn)
+    {
+        // For simplicity, all edges are drawn in a neutral color
+        // In future could track which player drew which edge
+        if (!isDrawn) return "edge-available";
+        return "edge-player1"; // Use a neutral drawn color
+    }
+
+    private string GetCellClass(int owner)
+    {
+        return owner == 0 ? "cell-player1" : "cell-player2";
+    }
+
+    private (int x, int y) GetVertexCoordinates(int vertexIndex)
+    {
+        var (gridX, gridY) = _vertexPositions[vertexIndex];
+        int centerX = _svgWidth / 2;
+        int centerY = _svgHeight / 2;
+        
+        int x = centerX + gridX * _cellSize;
+        int y = centerY + gridY * _cellSize;
+        
+        return (x, y);
+    }
+
+    private (int x1, int y1, int x2, int y2) GetEdgeCoordinates(Edge edge)
+    {
+        var (x1, y1) = GetVertexCoordinates(edge.VertexA);
+        var (x2, y2) = GetVertexCoordinates(edge.VertexB);
+        return (x1, y1, x2, y2);
+    }
+
+    private (int cx, int cy) GetCellCenter(Cell cell)
+    {
+        // Get the 4 edges of the cell
+        var edges = _board.CellEdges[cell.Id];
+        
+        // Collect all vertices from these edges
+        var vertexSet = new HashSet<int>();
+        foreach (var edgeId in edges)
+        {
+            var edge = _board.Edges[edgeId];
+            vertexSet.Add(edge.VertexA);
+            vertexSet.Add(edge.VertexB);
+        }
+        
+        // Calculate center from vertex positions
+        int sumX = 0, sumY = 0;
+        foreach (var vertexIdx in vertexSet)
+        {
+            var (gridX, gridY) = _vertexPositions[vertexIdx];
+            sumX += gridX;
+            sumY += gridY;
+        }
+        
+        int avgGridX = sumX / vertexSet.Count;
+        int avgGridY = sumY / vertexSet.Count;
+        
+        int centerX = _svgWidth / 2;
+        int centerY = _svgHeight / 2;
+        
+        int cx = centerX + avgGridX * _cellSize;
+        int cy = centerY + avgGridY * _cellSize;
+        
+        return (cx, cy);
+    }
+
+    private string GetWinnerText()
+    {
+        if (_gameState.Scores[0] > _gameState.Scores[1])
+            return "🏆 ¡Jugador 1 Gana!";
+        else if (_gameState.Scores[1] > _gameState.Scores[0])
+            return "🏆 ¡Jugador 2 Gana!";
+        else
+            return "🤝 ¡Empate!";
+    }
+
+    private void ResetGame()
+    {
+        _gameStarted = false;
+        _gameOver = false;
+        _isThinking = false;
+    }
+}

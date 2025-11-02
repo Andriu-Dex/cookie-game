@@ -1,0 +1,169 @@
+﻿@page "/"
+
+<PageTitle>Juego de la Galleta</PageTitle>
+
+<div class="home-container">
+    <div class="hero-section">
+        <h1 class="hero-title">🎮 Juego de la Galleta</h1>
+        <p class="hero-subtitle">Dots and Boxes con Inteligencia Artificial</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <span class="feature-icon">🤖</span>
+                <h3>IA Avanzada</h3>
+                <p>Minimax con poda Alpha-Beta</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3>Múltiples Modos</h3>
+                <p>Humano vs IA, IA vs IA, 2 Jugadores</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3>Diferentes Niveles</h3>
+                <p>Desde principiante hasta experto</p>
+            </div>
+        </div>
+
+        <a href="/game" class="btn-play">🎮 Jugar Ahora</a>
+
+        <div class="tech-info">
+            <h3>🏗️ Arquitectura del Proyecto</h3>
+            <ul>
+                <li>✅ Clean Architecture (4 capas)</li>
+                <li>✅ Principios SOLID</li>
+                <li>✅ 5 Patrones de Diseño (Strategy, Factory, Command, Iterator, Facade)</li>
+                <li>✅ Blazor Server con renderizado interactivo</li>
+                <li>✅ SVG para gráficos vectoriales</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .home-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero-section {
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title {
+        font-size: 4em;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5em;
+        color: #7f8c8d;
+        margin-bottom: 50px;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .feature-icon {
+        font-size: 3em;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+        color: #7f8c8d;
+    }
+
+    .btn-play {
+        display: inline-block;
+        padding: 20px 50px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1.5em;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s;
+    }
+
+    .btn-play:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .tech-info {
+        margin-top: 60px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        text-align: left;
+    }
+
+    .tech-info h3 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .tech-info ul {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .tech-info li {
+        padding: 10px;
+        color: #34495e;
+        font-size: 1.1em;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5em;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2em;
+        }
+
+        .btn-play {
+            font-size: 1.2em;
+            padding: 15px 35px;
+        }
+    }
+</style>

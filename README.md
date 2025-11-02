@@ -10,15 +10,18 @@ Implementación completa del juego "Dots and Boxes" (Juego de la Galleta) con In
 ## 🎮 Características
 
 ### Modos de Juego
+
 - 🎮 **Humano vs IA**: Desafía a la inteligencia artificial
 - 🤖 **IA vs IA**: Observa dos IAs compitiendo
 - 👥 **Humano vs Humano**: Modo local para dos jugadores
 
 ### Niveles de Dificultad
+
 - **Tamaño del Tablero**: Muy Fácil (4 celdas) a Difícil (40 celdas)
 - **IA**: Fácil (profundidad 2) a Experto (profundidad 5)
 
 ### Tecnología de IA
+
 - ✅ Algoritmo **Minimax** con poda **Alpha-Beta**
 - ✅ Heurística sofisticada multi-criterio
 - ✅ Ordenamiento de movimientos para mejor poda
@@ -62,44 +65,53 @@ Juego_Galleta/
 ## 🎯 Principios SOLID Aplicados
 
 ### Single Responsibility Principle (SRP)
+
 - `Board`: Solo gestiona la estructura del tablero
 - `GameState`: Solo gestiona el estado del juego
 - `SimpleDotsEvaluator`: Solo evalúa estados
 - `MinimaxAlphaBeta`: Solo implementa el algoritmo de búsqueda
 
 ### Open/Closed Principle (OCP)
+
 - `IBoardShape`: Permite nuevas formas de tablero sin modificar código
 - `IEvaluator`: Permite nuevas heurísticas sin cambiar el algoritmo
 - `ISearchStrategy`: Permite nuevos algoritmos sin modificar la lógica
 
 ### Liskov Substitution Principle (LSP)
+
 - Todas las implementaciones de interfaces son sustituibles
 - `GalletaShapeFactory` puede reemplazarse por otra fábrica
 
 ### Interface Segregation Principle (ISP)
+
 - Interfaces pequeñas y específicas
 - Ninguna clase implementa métodos que no necesita
 
 ### Dependency Inversion Principle (DIP)
+
 - `MinimaxAlphaBeta` depende de `IEvaluator`, no de implementación concreta
 - `AIPlayer` depende de `ISearchStrategy`, no de implementación concreta
 
 ## 🎨 Patrones de Diseño Implementados
 
 ### 1. Strategy Pattern
+
 - **Interfaz**: `ISearchStrategy`, `IEvaluator`
 - **Uso**: Permite cambiar algoritmo de búsqueda y evaluación en tiempo de ejecución
 
 ### 2. Factory Method Pattern
+
 - **Interfaz**: `IBoardShape`
 - **Implementación**: `GalletaShapeFactory`
 - **Uso**: Creación de diferentes formas de tablero
 
 ### 3. Command Pattern
+
 - **Métodos**: `GameState.Apply()` y `GameState.Undo()`
 - **Uso**: Aplicar y revertir movimientos para búsqueda
 
 ### 4. Iterator Pattern
+
 - **Implementación**: `GameState.GenerateMoves()` usa `yield return`
 - **Uso**: Generación eficiente de movimientos disponibles
 
@@ -108,6 +120,7 @@ Juego_Galleta/
 ### Algoritmo: Minimax con Poda Alpha-Beta
 
 **Minimax** es un algoritmo de búsqueda adversarial que:
+
 1. Explora el árbol de juego
 2. Asume que el oponente juega óptimamente
 3. Maximiza la ganancia del jugador actual
@@ -124,6 +137,7 @@ Score = Material×100 + Almost×20 + SafeMoves×5 + TwoSided×2
 ```
 
 Donde:
+
 - **Material**: Diferencia de celdas capturadas (objetivo principal)
 - **Almost**: Celdas con 3 lados - penaliza dejar celdas peligrosas
 - **SafeMoves**: Movimientos que no regalan celdas al oponente
@@ -132,22 +146,24 @@ Donde:
 ### Ordenamiento de Movimientos
 
 Para maximizar la eficiencia de la poda:
+
 1. **Capturas** (completan celdas) - Prioridad máxima
 2. **Movimientos seguros** (no crean 3-sided cells)
 3. **Movimientos peligrosos** (crean oportunidades para el oponente)
 
 ### Rendimiento
 
-| Métrica | Valor |
-|---------|-------|
-| Nodos explorados (profundidad 4) | ~3,700 |
-| Nodos sin poda (estimado) | ~1,700,000 |
-| **Eficiencia de poda** | **99.8%** |
-| Tiempo de respuesta | <15ms |
+| Métrica                          | Valor      |
+| -------------------------------- | ---------- |
+| Nodos explorados (profundidad 4) | ~3,700     |
+| Nodos sin poda (estimado)        | ~1,700,000 |
+| **Eficiencia de poda**           | **99.8%**  |
+| Tiempo de respuesta              | <15ms      |
 
 ## 🚀 Cómo Ejecutar
 
 ### Requisitos
+
 - .NET 8.0 SDK o superior
 
 ### Ejecutar el Juego
@@ -189,12 +205,14 @@ dotnet build
 ## 📊 Estructura de Datos
 
 ### Board (Tablero)
+
 - **Vértices**: Puntos del tablero
 - **Aristas**: Líneas entre puntos
 - **Celdas**: Cuadros formados por 4 aristas
 - **Mapeos precalculados**: EdgesToCells, CellEdges (optimización)
 
 ### GameState (Estado del Juego)
+
 - **BitArray** para aristas dibujadas (eficiencia de memoria)
 - **BitArray** para celdas capturadas
 - **Array** de propietarios de celdas
@@ -204,27 +222,32 @@ dotnet build
 ## 🧪 Pruebas Implementadas
 
 ### Fase 1: Entidades Básicas
+
 - ✅ Creación de Edge, Cell, Board
 - ✅ Validación de estructura
 - ✅ Mapeos precalculados
 
 ### Fase 2: GameState
+
 - ✅ Apply/Undo de movimientos
 - ✅ Detección de capturas
 - ✅ Turnos extra
 - ✅ Clonación de estados
 
 ### Fase 3: Generador de Tableros
+
 - ✅ Tableros de diferentes tamaños
 - ✅ Forma de diamante correcta
 - ✅ Validación estructural
 
 ### Fase 4: Evaluador Heurístico
+
 - ✅ Evaluación de estados
 - ✅ Identificación de movimientos seguros/peligrosos
 - ✅ Estados terminales
 
 ### Fase 5: Minimax con Alpha-Beta
+
 - ✅ Búsqueda completa
 - ✅ Poda eficiente
 - ✅ AI vs AI
