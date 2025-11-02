@@ -74,16 +74,20 @@
                         <button @onclick="ResetGame" class="btn btn-success">🔄 Nuevo Juego</button>
                     </div>
                 }
-                else if (_isThinking)
-                {
-                    <div class="thinking-panel">
-                        <div class="spinner"></div>
-                        <p>🤖 IA pensando...</p>
-                    </div>
-                }
             </div>
 
             <div class="board-wrapper">
+                <!-- Overlay de IA pensando (flotante) -->
+                @if (_isThinking)
+                {
+                    <div class="thinking-overlay">
+                        <div class="thinking-badge">
+                            <div class="spinner-small"></div>
+                            <span>🤖 IA pensando...</span>
+                        </div>
+                    </div>
+                }
+                
                 <svg width="@_svgWidth" height="@_svgHeight" class="game-board">
                     <!-- Grid Lines (fondo) -->
                     @foreach (var edge in _board.Edges)
