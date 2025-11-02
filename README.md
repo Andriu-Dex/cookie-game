@@ -1,8 +1,5 @@
 # 🍪 Juego de la Galleta - Dots and Boxes con IA
 
-**Proyecto Académico - Patrones de Software**  
-Universidad UTA - Ingeniería de Software
-
 ## 📋 Descripción
 
 Implementación completa del juego "Dots and Boxes" (Juego de la Galleta) con Inteligencia Artificial basada en el algoritmo **Minimax con poda Alpha-Beta**. El proyecto sigue principios de **Clean Architecture**, **SOLID** y patrones de diseño clásicos.
