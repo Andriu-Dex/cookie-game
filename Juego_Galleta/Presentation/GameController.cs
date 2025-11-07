@@ -1,6 +1,5 @@
-using Juego_Galleta.Domain.Entities;
-using Juego_Galleta.Domain.Interfaces;
 using Juego_Galleta.Application.AI;
+using Juego_Galleta.Domain.Entities;
 
 namespace Juego_Galleta.Presentation;
 

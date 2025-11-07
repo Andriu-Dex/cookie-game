@@ -5,6 +5,66 @@
     {
       "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\presentation\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\presentation\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\presentation\\boardrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\presentation\\boardrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\interfaces\\isearchstrategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\interfaces\\isearchstrategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\interfaces\\ievaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\interfaces\\ievaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\interfaces\\iboardshape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\interfaces\\iboardshape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\point2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\point2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\galletashapefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\galletashapefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\domain\\entities\\appliedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\domain\\entities\\appliedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\application\\ai\\simpledotsevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\application\\ai\\simpledotsevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|c:\\users\\andri\\documents\\documentos\\universidad uta\\ingenier\u00ECa de software\\semestre 5\\patrones de software\\parcial 2\\problemassuplementarios-grupo\\juego_galleta\\juego_galleta\\application\\ai\\aiplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42C7FD0B-3A12-41B6-AC42-1EB28602829E}|Juego_Galleta\\Juego_Galleta.csproj|solutionrelative:juego_galleta\\application\\ai\\aiplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,12 +74,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -28,9 +84,212 @@
               "RelativeDocumentMoniker": "Juego_Galleta\\Program.cs",
               "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Program.cs",
               "RelativeToolTip": "Juego_Galleta\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-01T23:56:33.683Z",
+              "WhenOpened": "2025-11-07T14:34:06.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameController.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Presentation\\GameController.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Presentation\\GameController.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Presentation\\GameController.cs",
+              "RelativeToolTip": "Juego_Galleta\\Presentation\\GameController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:42.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BoardRenderer.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Presentation\\BoardRenderer.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Presentation\\BoardRenderer.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Presentation\\BoardRenderer.cs",
+              "RelativeToolTip": "Juego_Galleta\\Presentation\\BoardRenderer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:39.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ISearchStrategy.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Interfaces\\ISearchStrategy.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Interfaces\\ISearchStrategy.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Interfaces\\ISearchStrategy.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Interfaces\\ISearchStrategy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:33.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IEvaluator.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Interfaces\\IEvaluator.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Interfaces\\IEvaluator.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Interfaces\\IEvaluator.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Interfaces\\IEvaluator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:29.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IBoardShape.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Interfaces\\IBoardShape.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Interfaces\\IBoardShape.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Interfaces\\IBoardShape.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Interfaces\\IBoardShape.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:27.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Point2D.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Point2D.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\Point2D.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Point2D.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\Point2D.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:06.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Move.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Move.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\Move.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Move.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\Move.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:33:02.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GameState.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\GameState.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\GameState.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\GameState.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\GameState.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:59.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GalletaShapeFactory.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\GalletaShapeFactory.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\GalletaShapeFactory.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\GalletaShapeFactory.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\GalletaShapeFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:53.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Edge.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Edge.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\Edge.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Edge.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\Edge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:51.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Cell.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Cell.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\Cell.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Cell.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\Cell.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:48.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Board.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Board.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\Board.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\Board.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\Board.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:41.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AppliedResult.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\AppliedResult.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Domain\\Entities\\AppliedResult.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Domain\\Entities\\AppliedResult.cs",
+              "RelativeToolTip": "Juego_Galleta\\Domain\\Entities\\AppliedResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:37.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SimpleDotsEvaluator.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Application\\AI\\SimpleDotsEvaluator.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Application\\AI\\SimpleDotsEvaluator.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Application\\AI\\SimpleDotsEvaluator.cs",
+              "RelativeToolTip": "Juego_Galleta\\Application\\AI\\SimpleDotsEvaluator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:32:28.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AIPlayer.cs",
+              "DocumentMoniker": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Application\\AI\\AIPlayer.cs",
+              "RelativeDocumentMoniker": "Juego_Galleta\\Application\\AI\\AIPlayer.cs",
+              "ToolTip": "C:\\Users\\andri\\Documents\\Documentos\\Universidad UTA\\Ingenier\u00ECa De Software\\Semestre 5\\Patrones De Software\\Parcial 2\\ProblemasSuplementarios-Grupo\\Juego_Galleta\\Juego_Galleta\\Application\\AI\\AIPlayer.cs",
+              "RelativeToolTip": "Juego_Galleta\\Application\\AI\\AIPlayer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T14:30:30.343Z",
               "EditorCaption": ""
             }
           ]
